@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "live": "^0.1.19",
     "live-serve": "^0.0.0",
-    "p5": "^1.11.3"
+    "live-server": "^1.2.2",
+    "p5": "^1.11.3",
+    "server": "^0.0.3"
   }
 }
