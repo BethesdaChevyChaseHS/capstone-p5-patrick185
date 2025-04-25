@@ -1,6 +1,5 @@
-
-
-
+const { redirect } = require("server/reply");
+ 
 function setup() {
     createCanvas(800, 600);
     background(220);
@@ -11,11 +10,18 @@ function setup() {
 
 function draw() {
     background(220);
-    textSize(40);
-    text('$' + clicks, 150, 50);
+    text(clicks, 200, 200);
+    
 }
 
-function mouseClicked() {
-    click();
+
+
+function mouseReleased() {
+    if(mouseX < 400) {
+        click();
+    }
+    else {
+        upgrader(0);
+    }
 }
 

@@ -3,11 +3,11 @@ let multiplier = 1.0;
 
 
 function click() {
-    clicks = clicks + 1 * multiplier;
-    
+    clicks = clicks + 1 * finalClickMultiplier;
+    clicks = Math.round(clicks);
+    console.log(clicks);
 }
 
-function upgrade_multiplier(amount) {
-    multiplier += amount;
-}
+
+
 
