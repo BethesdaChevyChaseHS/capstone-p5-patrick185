@@ -21,7 +21,7 @@ class miner {
     work() {
         let material = getRandomMaterial();
         if (material) {
-            material.total += 1 * round(this.level/2)*this.pickaxeLevel; 
+            material.total += .05 * round(this.level/2)*this.pickaxeLevel/2;
             
         }
         this.xp += 10;
@@ -77,18 +77,10 @@ function buyMiner() {
 
 function checkForWork() {
    
-    sleep(1000)
+    
     if (hasMine && mineCompany.miners.length > 0) {
         mineCompany.work();
     }
 }
 
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}

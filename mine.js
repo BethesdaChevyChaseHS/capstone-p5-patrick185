@@ -29,6 +29,18 @@ let miningMaterials = [
         rarity: "Rare",
         value: 80,
         total: 0
+    },
+    {
+        name: "Refined Metal",
+        rarity: "Common",
+        value: 40,
+        total: 0
+    },
+    {
+        name: "Steel",
+        rarity: "Uncommon",
+        value: 80,
+        total: 0
     }
 ];
 
@@ -43,7 +55,7 @@ let miningLevel = 1;
 function mine() {
     let material = getRandomMaterial();
     if (material) {
-        material.total += 1 * round(miningLevel/2)*pickaxeLevel; 
+        material.total += 1 * round(miningLevel/2)*pickaxeLevel/2; 
         console.log(`You mined a ${material.name}! Total: ${material.total}`);
     } else {
         console.log("No material found.");
@@ -107,7 +119,7 @@ function sellMaterial(materialName) {
             
 
             money+=earnings; // Return the earnings
-            newWorth+=earnings
+            netWorth+=earnings
         } else {
             console.log(`You don't have any ${material.name} to sell.`);
             return 0; // No earnings if there's nothing to sell

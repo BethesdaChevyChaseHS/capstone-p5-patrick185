@@ -1,5 +1,7 @@
-let money = 0;
+let money = 100000000;
 
-let newWorth = 0;
+let netWorth = 0;
 
+
+let curScreen = "home";
 
