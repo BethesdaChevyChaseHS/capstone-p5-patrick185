@@ -53,10 +53,23 @@ let miningLevel = 1;
 
 
 function mine() {
+    let totalOre = 0;
+    for (let i = 0; i < miningMaterials.length; i++) {
+        totalOre += miningMaterials[i].total;
+    }
+
     let material = getRandomMaterial();
-    if (material) {
-        material.total += 1 * round(miningLevel/2)*pickaxeLevel/2; 
+    if (material && totalOre < getTotalWarehouseSize()) {
+        if (material.total + 1 * Math.round(miningLevel/2)*Math.round(pickaxeLevel/2) > getTotalWarehouseSize()) {
+            material.total+= getTotalWarehouseSize() - totalOre;
+            
+        }
+        else {
+        material.total += 1 * Math.round(miningLevel/2)*Math.round(pickaxeLevel/2); 
+        
         console.log(`You mined a ${material.name}! Total: ${material.total}`);
+        }
+        miningXP += 10;
     } else {
         console.log("No material found.");
     }
@@ -97,7 +110,7 @@ function getRandomMaterial() {
         selectedMaterial = miningMaterials.find(m => m.name === "Gold Nugget");
         
     }
-    miningXP += 10;
+    
     updateLevel();
     return selectedMaterial;
 }
@@ -108,14 +121,14 @@ function upgradePickaxe() {
         pickaxeLevel++;
     }
 }
-function sellMaterial(materialName) {
+function sellMaterial(materialName, amount) {
     const material = miningMaterials.find(m => m.name === materialName);
 
     if (material) {
-        if (material.total > 0) {
+        if (material.total >= amount) {
             // Sell 1 unit of the material
-            const earnings = material.value * material.total;
-            material.total -=  material.total;
+            const earnings = material.value * amount;
+            material.total-= amount; 
             
 
             money+=earnings; // Return the earnings
@@ -128,5 +141,16 @@ function sellMaterial(materialName) {
         console.log(`Material ${materialName} not found.`);
         return 0; // No earnings if the material doesn't exist
     }
+}
+
+function getMaterialTotal() {
+    let total = 0;
+    for (let i = 0; i < miningMaterials.length; i++) {
+        total += miningMaterials[i].total;
+    }
+    for (let i = 0; i < alloys.length; i++) {
+        total += alloys[i].total;
+    }
+    return total;
 }
 

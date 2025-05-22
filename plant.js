@@ -61,7 +61,7 @@ function buyPlant() {
 
 
 function produce(metal, otherMetal) {
-    console.log("Producing alloy with " + metal + " and " + otherMetal);
+    
         const alloy = alloys.find(a =>
             a.components.includes(metal) && a.components.includes(otherMetal)
         );
@@ -81,15 +81,16 @@ function produce(metal, otherMetal) {
         
 }
     
-function sellAlloy(alloyName) {
+function sellAlloy(alloyName, amount) {
     const alloy = alloys.find(a => a.name === alloyName);
 
     if (alloy) {
-        if (alloy.total > 0) {
+        if (alloy.total >= amount) {
             // Sell 1 unit of the alloy
-            const earnings = alloy.value * alloy.total;
-            alloy.total -=  alloy.total;
+            const earnings = alloy.value * amount;
+            alloy.total -=  amount;
             money += earnings;
+            netWorth += earnings;
         } 
     } 
 }

@@ -20,17 +20,19 @@ class miner {
 
     work() {
         let material = getRandomMaterial();
-        if (material) {
-            material.total += .05 * round(this.level/2)*this.pickaxeLevel/2;
-            
-        }
-        this.xp += 10;
+        if (material && getMaterialTotal()<getTotalWarehouseSize()) {
+            material.total++;
+            this.xp += 10;
+        
+        
+        
         this.levelUp();
     }
+    }
     upgradePickaxe() {
-        if (money >= 1000) {
+        if (money >= 10000) {
             this.pickaxeLevel++;
-            money -= 1000;
+            money -= 10000;
         }
     }
     getXP() {
@@ -52,9 +54,9 @@ class miningCompany {
     }
 
     hireMiner() {
-        if(money >= 10000) {
+        if(money >= 100000) {
             this.miners.push(new miner());
-            money -= 10000;
+            money -= 100000;
         }
     }
     
@@ -69,7 +71,7 @@ function buyMine() {
 }
 
 function buyMiner() {
-    if (money >= 10000 && hasMine && mineCompany.miners.length < 5) {
+    if (money >= 100000 && hasMine && mineCompany.miners.length < 5) {
         mineCompany.hireMiner();
         console.log("Miner hired. Total miners: " + mineCompany.miners.length);
     } 
