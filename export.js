@@ -104,23 +104,35 @@ function buyCargoPlane()  {
 }
 
 function exportGoods(type) {
-    const material = miningMaterials.find(m => m.name === type);
-    
+    // Try to find the material in miningMaterials first
+    let material = miningMaterials.find(m => m.name === type);
+    let isAlloy = false;
+
+    // If not found, try to find it in alloys
+    if (!material && typeof alloys !== "undefined") {
+        material = alloys.find(a => a.name === type);
+        isAlloy = true;
+    }
+
     if (!material) {
         console.log("Material not found.");
         return;
     }
+
     // Determine the max amount we can sell
     const amountToSell = Math.min(material.total, sellCapacity);
     if (amountToSell > 0) {
-        sellMaterial(type, amountToSell);
-        console.log(`Exported ${amountToSell} ${type}(s).`);
+        if (isAlloy) {
+            sellAlloy(type, amountToSell);
+            console.log(`Exported ${amountToSell} ${type}(s) (alloy).`);
+        } else {
+            sellMaterial(type, amountToSell);
+            console.log(`Exported ${amountToSell} ${type}(s).`);
+        }
     } else {
         console.log("Nothing to export or no capacity.");
     }
-    
 }
-
 function getTotalWarehouseSize() {
     let totalSize = 10;
     for (let i = 0; i < OwnedWarehouses.length; i++) {

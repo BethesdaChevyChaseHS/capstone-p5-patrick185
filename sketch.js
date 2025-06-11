@@ -108,7 +108,8 @@ function draw() {
             text("Gold-Steel Alloy: " + alloys[3].total,775, 100);
             text("Iron-Steel Alloy: " + alloys[4].total,775, 125);
             text("Emerald-Steel Alloy: " + alloys[5].total,775, 150);
-            text("Refined Metal: " + miningMaterials[5].total,920, 175);
+            text("Refined Metal: " + miningMaterials[5].total,920, 25);
+            text("Steel: " + miningMaterials[6].total,920, 50);
             createButton("Buy Van - $5,000").position(440, 42).style('font-size', '10px').mousePressed(() => {buyVan()});
             createButton("Buy Truck - $50,000").position(440, 67).style('font-size', '10px').mousePressed(() => {buyTruck()});
             createButton("Buy Barge - $100,000").position(440, 92).style('font-size', '10px').mousePressed(() => {buyBarge()});
@@ -119,6 +120,7 @@ function draw() {
             createButton("Buy Distribution Center - $1,000,000").position(455, 217).style('font-size', '10px').mousePressed(() => {buyWarehouse(1)});
             createButton("Buy Freight Warehouse - $4,000,000").position(455, 242).style('font-size', '10px').mousePressed(() => {buyWarehouse(2)});
             createButton("Buy Logistics Hub - $12,500,000").position(455, 267).style('font-size', '10px').mousePressed(() => {buyWarehouse(3)});
+
             text("Coal: " + Math.round(miningMaterials[3].total),630, 25);
             text("Iron: " +  Math.round(miningMaterials[0].total),630, 50);
             text("Gold: " +  Math.round(miningMaterials[1].total),630, 75);
@@ -131,7 +133,14 @@ function draw() {
                 createButton("Export").position(730, 70).style('font-size', '10px').mousePressed(() => exportGoods("Gold Nugget"));
                 createButton("Export").position(730, 95).style('font-size', '10px').mousePressed(() => exportGoods("Emerald"));
                 createButton("Export").position(730, 120).style('font-size', '10px').mousePressed(() => exportGoods("Diamond"));
-                
+                createButton("Export").position(875, 20).style('font-size', '10px').mousePressed(() => exportGoods("Gold Alloy"));
+                createButton("Export").position(875, 45).style('font-size', '10px').mousePressed(() => exportGoods("Iron Alloy"));
+                createButton("Export").position(880, 70).style('font-size', '10px').mousePressed(() => exportGoods("Emerald Alloy"));
+                createButton("Export").position(890, 95).style('font-size', '10px').mousePressed(() => exportGoods("Gold-Steel Alloy"));
+                createButton("Export").position(890, 120).style('font-size', '10px').mousePressed(() => exportGoods("Iron-Steel Alloy"));
+                createButton("Export").position(900, 145).style('font-size', '10px').mousePressed(() => exportGoods("Emerald-Steel Alloy"));
+                createButton("Export").position(1025, 20).style('font-size', '10px').mousePressed(() => exportGoods("Refined Metal"));
+                createButton("Export").position(1000, 45).style('font-size', '10px').mousePressed(() => exportGoods("Steel"));
             }
         }
 

@@ -19,18 +19,26 @@ class miner {
     }
 
     work() {
-        let material = getRandomMaterial();
-        if (material && getMaterialTotal()<getTotalWarehouseSize()) {
-            material.total++;
+    let material = getRandomMaterial();
+    if (material) {
+        let spaceLeft = getTotalWarehouseSize() - getMaterialTotal();
+        let amountToMine = this.pickaxeLevel + this.getLevel();
+        if (spaceLeft > 0) {
+            // Only mine up to the available space
+            let mined = Math.min(amountToMine, spaceLeft);
+            material.total += mined;
             this.xp += 10;
-        
-        
+        } else {
+            // No space left, don't mine
+            console.log("Warehouse full, cannot mine more.");
+        }
         
         this.levelUp();
     }
-    }
+}
+    
     upgradePickaxe() {
-        if (money >= 10000) {
+        if (money >= 10000 && this.pickaxeLevel < 100) {
             this.pickaxeLevel++;
             money -= 10000;
         }
@@ -64,7 +72,7 @@ class miningCompany {
 let mineCompany = new miningCompany();
 
 function buyMine() {
-    if(money >= 1200000) {
+    if(money >= 1200000  && !hasMine) {
         hasMine = true;
         money -= 1200000;
     }
