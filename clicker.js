@@ -1,4 +1,4 @@
-let money = 100000000;
+let money = 0;
 
 let netWorth = 0;
 
